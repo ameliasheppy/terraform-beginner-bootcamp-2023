@@ -16,3 +16,8 @@ Given a version number **MAJOR.MINOR.PATCH**, increment the:
 - we do not need to do v1.0.01, even though many prefer to
 
 We can also commit things to an issue, which is super cool!
+
+## New tags
+Make a new tag with **git tag 0.1.1** (or whatever tag you want to apply)
+Then run the command **git push --tags**
+
