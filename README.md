@@ -14,3 +14,5 @@ Given a version number **MAJOR.MINOR.PATCH**, increment the:
 
 - Additional labels for pre-release and build metadata are available as extensions to the MAJOR.MINOR.PATCH format. eg `1.0.01`
 - we do not need to do v1.0.01, even though many prefer to
+
+We can also commit things to an issue, which is super cool!
