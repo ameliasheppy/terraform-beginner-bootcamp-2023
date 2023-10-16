@@ -23,3 +23,19 @@ We can also commit things to an issue, which is super cool!
 
 To see hidden files: ls -la
 ls -la ./bin
+Now let's change some permissions with chmod
+![Edit using the Terraform CLI to permissions](image.png)
+
+Notice that we added the x to our permissions, that means that we turned this into an executable!
+We did chmod u+x <- we added an executable to the user group
+
+What does that accomplish for us? Instead of having to run 
+source ./bin/install_terraform_cli 
+Now we can just run
+./bin/install_terraform_cli 
+And it will run our file to get the appropriate setup running for us.
+
+That's how to make bash/power shell scripts! 
+
+Get good at it....
+
