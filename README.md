@@ -16,3 +16,12 @@ Given a version number **MAJOR.MINOR.PATCH**, increment the:
 - we do not need to do v1.0.01, even though many prefer to
 
 We can also commit things to an issue, which is super cool!
+
+## Linux info commands
+To determine info on our system, run 
+uname -srm <-tells you in you are using Linux
+cat /etc/os-release <-gives more info on the Linux system
+This is important bc the Linux version can affect different things that we do
+
+## gitpod.yml file info
+Has tasks in it that will help launch our terminals
