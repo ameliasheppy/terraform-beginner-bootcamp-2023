@@ -16,3 +16,10 @@ Given a version number **MAJOR.MINOR.PATCH**, increment the:
 - we do not need to do v1.0.01, even though many prefer to
 
 We can also commit things to an issue, which is super cool!
+
+## Shebangs.....what?
+
+## Linux permissions/CHMOD
+
+To see hidden files: ls -la
+ls -la ./bin
