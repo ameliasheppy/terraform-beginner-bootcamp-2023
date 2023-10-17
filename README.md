@@ -39,3 +39,10 @@ That's how to make bash/power shell scripts!
 
 Get good at it....
 
+Want to make everything executable? 
+chmod 777 ./bin/install_terraform_cli
+And then fix it so it's not all executable?
+chmod 744 ./bin/install_terraform_cli
+
+In the gitpod.yml file, we do need to add source ./bin/install_terraform_cli bc it requires the source word
+Also, in that file, instead of using init, we are going to use before: with our tasks
