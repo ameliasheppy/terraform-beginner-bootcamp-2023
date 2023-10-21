@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 # The above is how we make this file be portable so it is more usable.
 
+PROJECT_ROOT=/workspace/terraform-beginner-bootcamp-2023
+
+cd /workspace
+
 sudo apt-get update && sudo apt-get install -y gnupg software-properties-common curl
 
 wget -O- https://apt.releases.hashicorp.com/gpg | \
@@ -20,3 +24,6 @@ sudo apt update
 sudo apt-get install terraform -y
 
 cd $PROJECT_ROOT
+#The above is the same as the below, but it makes it more portable and reusable
+# cd /workspace/terraform-beginner-bootcamp-2023
+
