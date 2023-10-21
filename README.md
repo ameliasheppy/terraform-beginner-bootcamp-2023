@@ -108,3 +108,66 @@ In the gitpod.yml file, we do need to add source ./bin/install_terraform_cli bc 
 ### Github Lifecycle (Before, Init, Command)
 We need to be careful when using init bc it will not rerun if we restart an existing workspace
 
+## Env Vars
+#### `env` and grep commands
+Want to check what current environment variables you have? In your termial, run the command 
+```sh
+env 
+```
+These are specifically set variables for your env. They are usually strings. 
+We can check the specific env vars with a command like 
+```sh
+env | grep GITPOD
+```
+grep is a general Linux command to search for something specific
+```sh
+env | grep Amy
+env | grep terraform-beginner-bootcamp
+env | grep AWS_
+```
+To install stuff, cd out of the main dir. cd up to the main workspace
+Want to spit out where you are? 
+```sh
+echo $PROJECT_ROOT
+```
+When setting env vars, like in the [setup file](./bin/install_terraform_cli), remember, no space between the var name and the var value
+Then, always reference it with a $ like $PROJECT_ROOT
+
+To set an env var:  (note, leave off the $! )
+```sh
+export PROJECT_ROOT='/workspace/terraform-beginner-bootcamp-2023/'
+```
+Then, to check and verify that it is set:  (use the $ to ref the env var)
+```sh
+ echo $PROJECT_ROOT
+```
+We can also unset an env var: (note, leave off the $ to do this!)
+```sh
+ unset PROJECT_ROOT
+```
+We can set an env var temporarily with: 
+```sh
+HELLO='world ./bin/print_message
+```
+Within a bash script we can set env var without export like:
+```sh
+HELLO='world'
+echo $HELLO
+```
+#### Remember, print with `echo`
+```sh
+echo $HELLO
+```
+Each terminal env has it's own vars. If we run setting $HELLO in tf terminal, it may not work in aws cli. When you open up new bash terminals in VSCODE that you set in another window. If you want env vars to persist across all future bash terminals that are open you need to set env vars in your bash profile. (Look it up! `.bash_profile`)
+
+#### Persisting Env Vars in Gitpod
+We can persist env vars in Gitpod by storing them in Gitpod Secrets Storage.
+```sh
+gp env HELLO='world
+```
+All future workspaces launched will set the env vars for all bash terminals.
+You can also set env vars in the `gitpod.yml` but this can 
+```sh
+gp env PROJECT_ROOT='/workspace/terraform-beginner-bootcamp-2023'
+```
+Now this is put into secrets, so when we `echo $PROJECT_ROOT` it will be blank.
