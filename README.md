@@ -201,13 +201,102 @@ Run the credentials freq'ly so we make sure we don't accidentally deploy the wro
 We'll need to generate AWS CLI credentials from IAM user to generate AWS CLI.
 
 ### Terraform Registry
+TF sources providers and modules from the registry.
 Remember this, we will use this a lot! 
 [Terraform Registry](https://registry.terraform.io/)
 We can do several things here. Browse providers and modules are some options
-**Providers** --> Way that we directly interact with an API to interact with TF. A mapping of AWS' API to be utilized in TF. Direct interface with API. 
+- **Providers** --> Way that we directly interact with an API to interact with TF. A mapping of AWS' API to be utilized in TF. Direct interface to create resources in Terraform. 
 
-**Modules** --> Collection of TF files that give us a template to do commonly used actions. Use a lot of TF code with a provider? Turn it into a template that we can reuse as a module! Contain a lot of TF code. Templates for use!
+- **Modules** --> Collection of TF files that give us a template to do commonly used actions. Use a lot of TF code with a provider? Turn it into a template that we can reuse as a module! Contain a lot of TF code. Templates for use! 
 
 ### Random Provider
 We use the Hashicorp random provdier to create a resource with a generated random value that we can use to access the resource.
 [Lets generate some random stuff](https://registry.terraform.io/providers/hashicorp/random/latest)
+
+## Terraform Basics
+These are the main TF commands that we will work with from the TF console if we type `terraform` and hit enter :
+```sh
+
+Main commands:
+  init          Prepare your working directory for other commands
+  validate      Check whether the configuration is valid
+  plan          Show changes required by the current configuration
+  apply         Create or update infrastructure
+  destroy       Destroy previously-created infrastructure
+```
+
+After running (this will download the binaries for the tf providers we'll use in the project)
+``` sh
+terraform init
+``` 
+we can run 
+```sh 
+terraform plan
+``` 
+to see what changeset we created. In IAC, a changeset tells our plan of what we will execute to change:
+
+```sh
+gitpod /workspace/terraform-beginner-bootcamp-2023 (9-terraform-random-bucket-name) $ terraform plan 
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  # random_string.bucket_name will be created
+  + resource "random_string" "bucket_name" {
+      + id          = (known after apply)
+      + length      = 16
+      + lower       = true
+      + min_lower   = 0
+      + min_numeric = 0
+      + min_special = 0
+      + min_upper   = 0
+      + number      = true
+      + numeric     = true
+      + result      = (known after apply)
+      + special     = false
+      + upper       = true
+    }
+
+Plan: 1 to add, 0 to change, 0 to destroy.
+
+Changes to Outputs:
+  + random_bucket_name_id     = (known after apply)
+  + random_bucket_name_result = (known after apply)
+
+─────────────────────────────────────────────────────────────────────────
+
+Note: You didn't use the -out option to save this plan, so Terraform
+can't guarantee to take exactly these actions if you run "terraform
+apply" now.
+```
+We can output the changeset (AKA plan) to be passed to an apply, but often we can ignore the outputting
+
+```sh 
+terraform apply
+``` 
+will now make our plan happen! This passes the changeset to be done by TF. TF will always confirm to see if we want to deploy with yes or no. But we can auto approve with the below:
+```sh 
+ terraform apply --auto-approve
+```
+
+Check the output in a couple of ways:
+```sh 
+terraform output
+```
+OR
+```sh 
+terraform output random_bucket_name_result
+```
+
+### Terraform files we should know
+- [terraform.lock.hcl](.terraform.lock.hcl) is similar to package lock in JS projects. We are locking in the versions for the providers and modules that we are using. In the tf folder, we get the tf files in go/binary from the tf registry. We don't have to write it go, but it downloads and puts it in our work area. **COMMIT THIS TO THE REPO** 
+
+
+- [.terraform.tfstate](terraform.tfstate) contains info about the current state of the infra. **DO NOT COMMIT THIS TO THE REPO** Put it in the [.gitignore](.gitignore) like we did. Ignore it's entire dir. This file can contain sensitive data. If you lost this file, you can lose the state of your infra.
+
+- [.terraform.tfstate.backup](terraform.tfstate.backup) is the previous state file state.
+
+- terraform directory contains the binaries of tf providers

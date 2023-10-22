@@ -15,3 +15,20 @@ terraform {
 provider "random" {
   # Configuration options
 }
+
+#our resource we are applying random to is a bucket name
+resource "random_string" "bucket_name" {
+  length           = 16
+  special          = false
+}
+
+#don't really need both of the below. Commenting one out.
+# output "random_bucket_name_id" {
+#   value = random_string.bucket_name.id
+# }
+
+output "random_bucket_name_result" {
+  value = random_string.bucket_name.result
+}
+
+
