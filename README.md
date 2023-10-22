@@ -171,3 +171,32 @@ You can also set env vars in the `gitpod.yml` but this can
 gp env PROJECT_ROOT='/workspace/terraform-beginner-bootcamp-2023'
 ```
 Now this is put into secrets, so when we `echo $PROJECT_ROOT` it will be blank.
+
+### AWS CLI Installation
+To install AWS CLI into this project via the bash script [`./bin/install_aws_cli`](./bin/install_aws_cli)
+
+[AWS Getting Started Guide](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
+
+### AWS sanity check workflow
+Don't remove the on-partial line from our Gitpod.yml, it helps us by providing an auto complete for us when we type `aws` into the terminal.
+![AWS auto-complete](./on-partial.png)
+Now, to check if we are logged in/AWS credentials are configured correctly use the AWS CLI command:
+```sh
+aws sts get-caller-identity
+```
+If we successfully set the aws cli env vars, we should see a JSON payload return that looks like this:
+```json
+$ aws sts get-caller-identity
+{
+    "UserId": "ABCDEFGHIJKLMNOPQRSTUVWXYZ123",
+    "Account": "123456789012",
+    "Arn": "arn:aws:iam::123456789012:user/terraform-bootcamp"
+}
+```
+
+[AWS CLI env vars](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-envvars.html)
+
+Run the credentials freq'ly so we make sure we don't accidentally deploy the wrong company AWS account
+
+We'll need to generate AWS CLI credentials from IAM user to generate AWS CLI.
+
