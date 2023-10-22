@@ -200,3 +200,14 @@ Run the credentials freq'ly so we make sure we don't accidentally deploy the wro
 
 We'll need to generate AWS CLI credentials from IAM user to generate AWS CLI.
 
+### Terraform Registry
+Remember this, we will use this a lot! 
+[Terraform Registry](https://registry.terraform.io/)
+We can do several things here. Browse providers and modules are some options
+**Providers** --> Way that we directly interact with an API to interact with TF. A mapping of AWS' API to be utilized in TF. Direct interface with API. 
+
+**Modules** --> Collection of TF files that give us a template to do commonly used actions. Use a lot of TF code with a provider? Turn it into a template that we can reuse as a module! Contain a lot of TF code. Templates for use!
+
+### Random Provider
+We use the Hashicorp random provdier to create a resource with a generated random value that we can use to access the resource.
+[Lets generate some random stuff](https://registry.terraform.io/providers/hashicorp/random/latest)
