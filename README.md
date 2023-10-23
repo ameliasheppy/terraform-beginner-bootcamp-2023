@@ -352,3 +352,22 @@ Provide the following code (replace your token in the file):
 }
 ```
 We need to document issues like this for ourself and others. The above would be fabulous to automate with a bash script at some point
+
+### tf alias
+We want to be able to type `tf` instead of `terraform` in the terminal.
+First, access our bash_profile in the terminal with:
+```sh
+open ~/.bash_profile 
+```
+We set an alias in our bash profile like this
+```sh
+# set our terraform bash commmand to tf
+alias tf="terraform"
+```
+Now, when we set a new alias, we need to run our bash_file script with:
+```sh
+source ~/.bash_profile 
+```
+Then, in the terminal, run `tf` and you will see that the alias is applied and we can now access the terraform commands with `tf`
+
+In order for Gitpod to load and run the above every time we open our project, we need to write a bash script to load the alias to our bash_profile. 
