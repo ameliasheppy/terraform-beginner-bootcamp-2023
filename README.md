@@ -303,3 +303,52 @@ Will destroy resources that we created. We can also use the auto approve flag
 - [.terraform.tfstate.backup](terraform.tfstate.backup) is the previous state file state.
 
 - terraform directory contains the binaries of tf providers
+
+
+### Working in TF Cloud 
+Projects contain workspaces. 
+A workspace contains an infra project.
+Here is a lovely visual by Andrew Brown
+![Alt text](image-1.png)
+We ran 
+```sh 
+terraform init
+```
+
+```sh
+terraform apply --auto-approve
+```
+To get a new bucket that is then put in our state file. We can migrate our state file- it can be locally, in s3 or TF Cloud. In TF Cloud, we made a project, then a workspace. In that, we could use a Version control workflow which is GitOps. We commit code, when it is merged it deploys. But we are going to use a CLI-driven workflow. We could also use the API-driven, but it is advanced.
+
+To Migrate state to cloud, we c/p the code that was created in TF Cloud.
+We can do this with a 
+```sh
+terraform init
+```
+We had some issues with TF Cloud Login and Gitpod Workspace.
+When attempting to run `terraform login` in our tf terminal in Gitpod, it will launch a bash wisiwig view to generate a token. This does not work in Gitpod VSCode in the browser. 
+The workaround is manually generate a token in [Terraform Cloud](https://app.terraform.io/app/settings/tokens?source=terraform-login)
+
+Then create and open the file like this:
+
+``` sh
+touch /home/gitpod/.terraform.d/credentials.tfrc.json
+
+```
+
+``` sh
+open /home/gitpod/.terraform.d/credentials.tfrc.json
+```
+
+
+Provide the following code (replace your token in the file):
+```json
+{
+  "credentials": {
+    "app.terraform.io": {
+      "token": "YOUR-TERRAFORM-CLOUD-TOKEN"
+    }
+  }
+}
+```
+We need to document issues like this for ourself and others. The above would be fabulous to automate with a bash script at some point
