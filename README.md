@@ -290,6 +290,9 @@ OR
 ```sh 
 terraform output random_bucket_name_result
 ```
+### Terraform Destroy
+Will destroy resources that we created. We can also use the auto approve flag
+`terraform apply --auto-approve`
 
 ### Terraform files we should know
 - [terraform.lock.hcl](.terraform.lock.hcl) is similar to package lock in JS projects. We are locking in the versions for the providers and modules that we are using. In the tf folder, we get the tf files in go/binary from the tf registry. We don't have to write it go, but it downloads and puts it in our work area. **COMMIT THIS TO THE REPO** 
