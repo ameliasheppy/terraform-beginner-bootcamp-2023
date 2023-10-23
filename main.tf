@@ -5,6 +5,13 @@
 # making a main.tf file is making our own module/top level root level module
 #           YOU CAN ONLY HAVE ONE TERRAFORM AND ONE PROVIDER BLOCK!
 terraform {
+    cloud {
+    organization = "thegirl033007"
+
+    workspaces {
+      name = "terra-house-1"
+    }
+  }
   required_providers {
     random = {
       source = "hashicorp/random"
