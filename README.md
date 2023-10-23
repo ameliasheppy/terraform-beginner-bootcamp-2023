@@ -371,3 +371,6 @@ source ~/.bash_profile
 Then, in the terminal, run `tf` and you will see that the alias is applied and we can now access the terraform commands with `tf`
 
 In order for Gitpod to load and run the above every time we open our project, we need to write a bash script to load the alias to our bash_profile. 
+
+We have automated the TF Cloud login process using the following bash script [bin/generate_tfrc_credentials](./bin/generate_tfrc_credentials)
+
