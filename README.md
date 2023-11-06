@@ -1,6 +1,6 @@
 # Terraform Beginner Bootcamp 2023
 
-Architectural diagram of [this project](https://github.com/omenking/terraform-beginner-bootcamp-2023) by Andrew Brow
+Architectural diagram of [this project](https://github.com/omenking/terraform-beginner-bootcamp-2023) by Andrew Brown
 ![Alt text](image-2.png)
 
 ## Weekly Journals
