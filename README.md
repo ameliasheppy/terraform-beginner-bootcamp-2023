@@ -5,4 +5,4 @@ Architectural diagram of [this project](https://github.com/omenking/terraform-be
 
 ## Weekly Journals
 
--[Week 0 Journal](journal/week0Notes.md)
+-[Week 0 Journal](journal/week0Notes.md) -[Week 1 Journal](journal/week1Notes.md)
