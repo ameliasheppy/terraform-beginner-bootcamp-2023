@@ -61,3 +61,38 @@ PROJECT_ROOT
 ```
 
 https://developer.hashicorp.com/terraform/language/modules/develop/structure
+
+
+### Token Refresher!
+Andrew's token had expired for TF Cloud so he went and created a new one and then set it to the env with 
+`gp env TERRAFORM_CLOUD_TOKEN="andrewsFancySecretToken!"`
+ and then `export TERRAFORM_CLOUD_TOKEN="andrewsFancySecretToken!"`
+
+Then run the bin!
+## TF and input vars
+### TF Cloud vars
+In tf we can set 2 kinds of vars:
+- Env vars - eg AWS credentials we can set in bash
+- tf vars - those we'd set in the tfvars file like the user_uuid
+
+We can set our tf cloud vars as sensitive so they aren't shown in the UI.
+
+### Loading TF input vars 
+
+[Terraform Input Variables](https://developer.hashicorp.com/terraform/language/values/variables)
+### var flag
+We can use the `-var` flag to set an input var or override a var in the tfvars file like we did with `tf -var user_uuid="5ab644ae-ad4e-4258-b655-bd46ce69829d"`
+or `tf plan -var user_uuid="5ab644ae-ad4e-4258-b655-bd46ce69829d"`
+
+### var-file flag
+- TODO: document this flag
+
+### terraform.tfvars
+This is the default file to load in tf vars
+
+### auto.tfvars
+- TODO: document this functionality for tf cloud
+
+### order of tf vars
+- TODO: document which tf vars takes presidence
+

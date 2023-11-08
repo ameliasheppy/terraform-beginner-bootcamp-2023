@@ -4,32 +4,8 @@
 #On the Terraform Provider page, under **Use Provider** button, c/p the code:
 # making a main.tf file is making our own module/top level root level module
 #           YOU CAN ONLY HAVE ONE TERRAFORM AND ONE PROVIDER BLOCK!
-terraform {
-    cloud {
-    organization = "thegirl033007"
 
-    workspaces {
-      name = "terra-house-1"
-    }
-  }
-  required_providers {
-    random = {
-      source = "hashicorp/random"
-      version = "3.5.1"
-    }
-    aws = {
-      source = "hashicorp/aws"
-      version = "5.16.2"
-    }
-  }
-}
-
-provider "aws" {
-}
-#Random docs: https://registry.terraform.io/providers/hashicorp/random/latest
-provider "random" {
-  # Configuration options
-}
+#moving the below provider info to providers.tf
 
 #our resource we are applying random to is a bucket name
 #set lower = true so that we are following s3 naming policies
@@ -53,6 +29,10 @@ resource "random_string" "bucket_name" {
 #Bucket naming rules: https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html
 resource "aws_s3_bucket" "example" {
   bucket = random_string.bucket_name.result  
+
+  tags = {
+    UserUuid = var.user_uuid
+  }
 }
 #When we run TF plan, we get an error of: 
 #     Error: Inconsistent dependency lock file
@@ -68,8 +48,6 @@ resource "aws_s3_bucket" "example" {
 #   value = random_string.bucket_name.id
 # }
 
-output "random_bucket_name_result" {
-  value = random_string.bucket_name.result
-}
+#moving to outputs.tf!
 
 
