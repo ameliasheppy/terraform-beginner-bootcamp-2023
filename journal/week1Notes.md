@@ -96,3 +96,22 @@ This is the default file to load in tf vars
 ### order of tf vars
 - TODO: document which tf vars takes presidence
 
+## Managing Configuration Drift
+
+## What happens if we lose our state file?
+If you lose your state file, you most likely have to tear down all of your cloud infra manually.
+
+You can use tf import but it won't for all cloud resources. You need check the terraform providers documentation for which resources support import.
+
+### Fix Missing Resources With Terraform import
+If a junior accidentally or intentionally deletes a needed bucket, how will tf deal with the bucket being gone?
+Tf always checks the state for us. Tf looks to the state file to see what is there, what is missing, and with running `tf plan` (our great iac tool) we can make our bucket come back
+[AWS S3 Bucket Import ](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket#import)
+
+```sh
+terraform import aws_s3_bucket.bucket bucket-name
+```
+
+
+### Fix Manual Configuration
+If someone goes and deletes or modifies cloud resources manually through ClickOps, we can run `tf plan` again and it will attempt to put our infra back into the expected state which will fix our config drift. 
