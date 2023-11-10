@@ -85,7 +85,7 @@ UBUNTU_CODENAME=jammy
 To see hidden files: ls -la
 ls -la ./bin
 Now let's change some permissions with chmod
-![Edit using the Terraform CLI to permissions](image.png)
+![Edit using the Terraform CLI to permissions](/images/image.png)
 
 Notice that we added the x to our permissions, that means that we turned this into an executable!
 We did chmod u+x <- we added an executable to the user group
@@ -233,7 +233,7 @@ To install AWS CLI into this project via the bash script [`./bin/install_aws_cli
 ### AWS sanity check workflow
 
 Don't remove the on-partial line from our Gitpod.yml, it helps us by providing an auto complete for us when we type `aws` into the terminal.
-![AWS auto-complete](./on-partial.png)
+![AWS auto-complete](/images/on-partial.png)
 Now, to check if we are logged in/AWS credentials are configured correctly use the AWS CLI command:
 
 ```sh
@@ -383,7 +383,7 @@ Will destroy resources that we created. We can also use the auto approve flag
 Projects contain workspaces.
 A workspace contains an infra project.
 Here is a lovely visual by Andrew Brown
-![Alt text](image-1.png)
+![Alt text](/images/image-1.png)
 We ran
 
 ```sh

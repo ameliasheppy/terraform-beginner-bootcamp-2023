@@ -5,6 +5,11 @@ Global namespace means that we can't name our bucket the same name as someone el
 s3 buckets are global, but you set a region on the bucket
 BC the namespace is global, but the storage is regional
 
+### Tf Refresh
+```sh
+terraform apply -refresh-only -auto-approve
+```
+
 ### Chris holding down the fort with some security knowledge
 
 Choose a region so that you know what hard drive it is written to
@@ -115,3 +120,42 @@ terraform import aws_s3_bucket.bucket bucket-name
 
 ### Fix Manual Configuration
 If someone goes and deletes or modifies cloud resources manually through ClickOps, we can run `tf plan` again and it will attempt to put our infra back into the expected state which will fix our config drift. 
+
+
+## Module nesting 
+We are making a module folder to hold our modules that we use
+
+## Terraform Modules
+
+### Terraform Module Structure
+
+It is recommend to place modules in a `modules` directory when locally developing modules but you can name it whatever you like.
+
+### Passing Input Variables
+
+We can pass input variables to our module.
+The module has to declare the terraform variables in its own variables.tf
+
+```tf
+module "terrahouse_aws" {
+  source = "./modules/terrahouse_aws"
+  user_uuid = var.user_uuid
+  bucket_name = var.bucket_name
+}
+```
+
+### Modules Sources
+
+Using the source we can import the module from various places such as:
+- locally
+- Github
+- Terraform Registry
+
+```tf
+module "terrahouse_aws" {
+  source = "./modules/terrahouse_aws"
+}
+```
+
+
+[Modules Sources](https://developer.hashicorp.com/terraform/language/modules/sources)
