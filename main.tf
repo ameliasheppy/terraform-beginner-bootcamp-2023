@@ -9,12 +9,21 @@
 
 #This will fail:  (tf plan has no idea that this will give us a bucket name that contains capital letters which will fail the S3 bucket naming rules)
 #Bucket naming rules: https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html
-resource "aws_s3_bucket" "website_bucket" {
-  bucket = var.bucket_name
+# resource "aws_s3_bucket" "website_bucket" {
+#   bucket = var.bucket_name
 
-  tags = {
-    UserUuid = var.user_uuid
-  }
+#   tags = {
+#     UserUuid = var.user_uuid
+#   }
+# }
+
+
+terraform {
+  
 }
-
-
+# There are many sources we can use for modules, but we are using a local source here
+module "terrahouse_aws" {
+  source = "./modules/terrahouse_aws"
+  user_uuid = var.user_uuid
+  bucket_name = var.bucket_name
+}
