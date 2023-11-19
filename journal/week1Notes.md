@@ -204,3 +204,55 @@ resource "aws_s3_object" "index_html" {
   source = "${path.root}/public/index.html"
 }
 
+## Terraform Locals
+
+Locals allows us to define local variables.
+It can be very useful when we need transform data into another format and have it referenced a varaible.
+
+```tf
+locals {
+  s3_origin_id = "MyS3Origin"
+}
+```
+[Local Values](https://developer.hashicorp.com/terraform/language/values/locals)
+
+## Terraform Data Sources
+
+This allows use to source data from cloud resources. Using data sources using the data block.
+
+This is useful when we want to reference cloud resources without importing them.
+
+```tf
+data "aws_caller_identity" "current" {}
+
+output "account_id" {
+  value = data.aws_caller_identity.current.account_id
+}
+```
+[Data Sources](https://developer.hashicorp.com/terraform/language/data-sources)
+
+It's like saying "there is an AMI we'll call example and we will give it these properties."
+
+
+
+## Working with JSON
+
+We use the jsonencode to create the json policy inline in the hcl.
+
+```tf
+> jsonencode({"hello"="world"})
+{"hello":"world"}
+```
+
+[jsonencode](https://developer.hashicorp.com/terraform/language/functions/jsonencode)
+
+## Resource Storage Issues
+
+Don't forget to set the content type. If you don't do this line of code, it will download the file. 
+```tf 
+  content_type = "text/html"
+```
+Then, when we added the code line, it downloads it again, so be sure to go into the Create Invalidation `/*` in the CF Distributions of your AWS Mgmt Console and then this will clear the cache of the file. This allows us to serve it instead of download the file. 
+
+Make sure that if you use the above html conten type that you use actual html in your files!
+
