@@ -335,3 +335,45 @@ aws cloudfront create-invalidation \
 
 ```
 
+## Using assets folder and loops
+
+In TF, we have uploaded one file at a time. But what if we want to upload multiple at one time? 
+Generally other declarative IAC tools can't loop through multiples. But we can go into our resource-storage and use a for each! 
+ChatGPT breaks the code to even attempt this. Don't try to use it unless you're Andrew or Bayko.
+
+Go into the tf console with 
+```tf
+tf console
+```
+Now we can do some fun functions! Look at the TF docs and see what we can do with fileset
+Check where you are with:
+```tf
+path.root
+```
+
+Now see what is here with fileset and string interpolation. Put in the path and the pattern to look for as args. We want to look at all of it.
+```tf
+fileset("${path.root}/public/assets", "*)
+```
+
+We can look at different ds in tf. There are more complex, structural types like a list(tuple), map(object). There are restrictions of how we can use the complex types. 
+A complex type is a type that groups multiple vars into a single value. 
+Complex types are rep'd by type constructors, but several of them also have shorthand keyword versions. 
+There are two categories of complex types:
+- collection types (for grouping similar values) -> list(should all be string), map, set
+- structural types (for grouping potentially NOT similar values) --> tuple, object
+These types make the lang more proficient. 
+A function expects one type at times, and you must cast it to a particular type. Casting can be a pain, but you can trace what you need and figure it out! Won't use day to day in tf probably. 
+
+## For Each Expressions
+
+For each allows us to enumerate over complex data types
+
+```sh
+[for s in var.list : upper(s)]
+```
+
+This is mostly useful when you are creating multiples of a cloud resource and you want to reduce the amount of repetitive terraform code.
+
+[For Each Expressions](https://developer.hashicorp.com/terraform/language/expressions/for)
+
