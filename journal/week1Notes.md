@@ -268,3 +268,70 @@ We only want for our content version to change when we update certain files or v
 Plain data values such as Local Values and Input Variables don't have any side-effects to plan against and so they aren't valid in replace_triggered_by. You can use terraform_data's behavior of planning an action each time input changes to indirectly use a plain value to trigger replacement.
 
 https://developer.hashicorp.com/terraform/language/resources/terraform-data
+
+## Provisioners
+
+Provisioners allow you to execute commands on compute instances eg. a AWS CLI command. We could place it in a resource as part of it.
+
+They are not recommended for use by Hashicorp because Configuration Management tools such as Ansible are a better fit, but the functionality exists. Use Ansible when possible!
+
+A VM allows you to feed a bash script or YAML, and with Ansible and Puppet, you can see each step as it goes to roll it back if needed. 
+
+
+[Provisioners](https://developer.hashicorp.com/terraform/language/resources/provisioners/syntax)
+
+### Local-exec
+
+This will execute command on the local machine running the terraform commands eg. plan, apply.
+
+
+```tf
+resource "aws_instance" "web" {
+  # ...
+
+  provisioner "local-exec" {
+    command = "echo The server's IP address is ${self.private_ip}"
+  }
+}
+```
+
+https://developer.hashicorp.com/terraform/language/resources/provisioners/local-exec
+
+### Remote-exec
+
+This will execute commands on a machine which you target. You will need to provide credentials such as ssh to get into the machine. Points to external compute that you can login to with ssh. 
+
+```tf
+resource "aws_instance" "web" {
+  # ...
+
+  # Establishes connection to be used by all
+  # generic remote provisioners (i.e. file/remote-exec)
+  connection {
+    type     = "ssh"
+    user     = "root"
+    password = var.root_password
+    host     = self.public_ip
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "puppet apply",
+      "consul join ${aws_instance.web.private_ip}",
+    ]
+  }
+}
+```
+https://developer.hashicorp.com/terraform/language/resources/provisioners/remote-exec
+
+### Heredoc Strings:
+A way that we can make multiline comments. Its two open angle brackets `<<`
+```tf
+ command = <<COMMAND
+aws cloudfront create-invalidation \
+--distribution-id ${aws_cloudfront_distribution.s3_distribution.id} \
+--paths '/*'
+    COMMAND
+
+```
+
