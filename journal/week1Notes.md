@@ -256,3 +256,15 @@ Then, when we added the code line, it downloads it again, so be sure to go into 
 
 Make sure that if you use the above html conten type that you use actual html in your files!
 
+
+### Changing the Lifecycle of Resources
+
+[Meta Arguments Lifcycle](https://developer.hashicorp.com/terraform/language/meta-arguments/lifecycle)
+
+We only want for our content version to change when we update certain files or values
+
+## Terraform Data
+
+Plain data values such as Local Values and Input Variables don't have any side-effects to plan against and so they aren't valid in replace_triggered_by. You can use terraform_data's behavior of planning an action each time input changes to indirectly use a plain value to trigger replacement.
+
+https://developer.hashicorp.com/terraform/language/resources/terraform-data

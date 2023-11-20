@@ -30,6 +30,10 @@ resource "aws_s3_object" "index_html" {
   content_type = "text/html"
 
   etag = filemd5(var.index_html_filepath)
+  lifecycle {
+    replace_triggered_by = [ terraform_data.content_version.output ]
+    ignore_changes = [ etag ]
+  }
 }
 
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_object
@@ -40,6 +44,9 @@ resource "aws_s3_object" "error_html" {
   content_type = "text/html"
 
   etag = filemd5(var.error_html_filepath)
+   lifecycle {
+    ignore_changes = [ etag ]
+  }
 }
 
 #we are putting in a bucket policy from AWS below
@@ -68,3 +75,9 @@ resource "aws_s3_bucket_policy" "bucket_policy" {
 }
 
 #above we are using the data field instead of the ARN, which is much cleaner, so that we can use the get_caller_identity
+
+#use a null resource to trigger content version updates
+#this is like using an imaginary object to track our version so we can clear the invalidation cache
+resource "terraform_data" "content_version" {
+  input = var.content_version
+}
