@@ -377,3 +377,26 @@ This is mostly useful when you are creating multiples of a cloud resource and yo
 
 [For Each Expressions](https://developer.hashicorp.com/terraform/language/expressions/for)
 
+## Security Best Practices
+### Secret Management
+Do not send to the repo:
+- Hard coded secretes
+- State file info
+- Var files
+- Provider/env vars
+
+TF cloud is a saas version that stores state files/vars locally. Declares them to be sensitive. We can manage who has read/write access. We can also use AWS Secrets Manager, Azure Key Vault, Hashicorp Vault, Google Secret Manager. We still have to manage who can access those secrets. 
+
+What about outputs? Some may be sensitive! We may generate as outputs passwords that are sensitive. Make `sensitive = true` on the output. 
+
+Instead of just managing with TF Cloud/local level, consider doing encryption. That will also protect your sensitive files. Gives you a local copy you can keep encrypted. 
+
+RECAP:
+Sensitive Data or Secret Mgmt is needed for
+  - TF state files
+  - TF vars
+  - TF env vars
+  - TF sensitive outputs
+Consider:
+  - Cloud Native or External Mgmt service
+  - Encryption
