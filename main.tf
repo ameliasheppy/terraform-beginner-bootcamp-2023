@@ -19,7 +19,12 @@
 
 
 terraform {
-  
+  cloud {
+        organization = "thegirl033007"
+    workspaces {
+      name = "terraform-cloud"
+    }
+  }
 }
 # There are many sources we can use for modules, but we are using a local source here
 module "terrahouse_aws" {
@@ -28,4 +33,6 @@ module "terrahouse_aws" {
   bucket_name = var.bucket_name
   error_html_filepath = var.error_html_filepath
   index_html_filepath = var.index_html_filepath
+  content_version = var.content_version
+  assets_path = var.assets_path
 }
