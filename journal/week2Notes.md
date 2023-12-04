@@ -70,3 +70,8 @@ The other validates set our visiblity to public, but we lock our cloudfront info
 
 
 **As a cloud engineer** get used to programming and working with languages that we only may have a highlevel familiarity with. 
+
+#### Just for clarity:
+To make sure that our Create works from our bin, we ran 
+`./bin/terratowns/create` and it generated a random uuid for us. Yay!
+Then we ran `./bin/terratowns/read <uuid that we just created>` and it showed us the payload. Sweet! 
