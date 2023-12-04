@@ -36,3 +36,5 @@ terraform.rc
 
 #Private Notes
 /securitynotes/
+
+terraform-provider-terratowns/terraform-provider-terratowns_v*
