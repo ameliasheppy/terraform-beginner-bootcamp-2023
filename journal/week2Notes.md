@@ -75,3 +75,8 @@ The other validates set our visiblity to public, but we lock our cloudfront info
 To make sure that our Create works from our bin, we ran 
 `./bin/terratowns/create` and it generated a random uuid for us. Yay!
 Then we ran `./bin/terratowns/read <uuid that we just created>` and it showed us the payload. Sweet! 
+
+## Making a TF Provider for Terratowns
+
+Super small reminder that echo is awesome! 
+We needed to set the $PROJECT_ROOT in our build_provider. So we checked the var with: `echo $PROJECT_ROOT` in the terminal. 
