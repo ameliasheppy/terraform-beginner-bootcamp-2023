@@ -79,4 +79,18 @@ Then we ran `./bin/terratowns/read <uuid that we just created>` and it showed us
 ## Making a TF Provider for Terratowns
 
 Super small reminder that echo is awesome! 
+
 We needed to set the $PROJECT_ROOT in our build_provider. So we checked the var with: `echo $PROJECT_ROOT` in the terminal. 
+
+To test things out, we have the bin provider, but now we want to configure it. 
+To make sure that we have the right perms:
+```sh
+chmod u+x bin/build_provider
+```
+In main.tf, we added a provider block. In our main.go file, for our Provider, we need the endpoint, uuid and token. So we set them in main.tf and commented out our custom module for terrahouse that we used to test our setup. 
+We ran into some errors. How can we debug them? In Gitpod.yml, we set `TF: debug` and then in the terminal ran 
+```sh
+export TF_LOG=DEBUG
+```
+Now we have debugging showing in the console, which is pretty helpful!
+
