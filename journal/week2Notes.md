@@ -79,6 +79,7 @@ Then we ran `./bin/terratowns/read <uuid that we just created>` and it showed us
 ## Making a TF Provider for Terratowns
 
 Super small reminder that echo is awesome! 
+
 We needed to set the $PROJECT_ROOT in our build_provider. So we checked the var with: `echo $PROJECT_ROOT` in the terminal. 
 
 To test things out, we have the bin provider, but now we want to configure it. 
@@ -92,3 +93,4 @@ We ran into some errors. How can we debug them? In Gitpod.yml, we set `TF: debug
 export TF_LOG=DEBUG
 ```
 Now we have debugging showing in the console, which is pretty helpful!
+
