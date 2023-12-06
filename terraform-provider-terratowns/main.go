@@ -255,6 +255,7 @@ func resourceHouseUpdate(ctx context.Context, d *schema.ResourceData, m interfac
 		"description": d.Get("description").(string),
 		"content_version": d.Get("content_version").(int),
 	}
+	// Marshal is like stringify
 	payloadBytes, err := json.Marshal(payload)
 	if err != nil {
 		return diag.FromErr(err)
